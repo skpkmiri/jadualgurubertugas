@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadual Guru Bertugas SKPK Miri 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { background-color: #2563eb; color: white; border-color: #2563eb; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen pb-12">
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Jadual Guru Bertugas Harian</h1>
+            <h2 class="text-xl text-blue-600 font-semibold uppercase tracking-wider">SK Pendidikan Khas Miri - Sesi 2026</h2>
+            <div class="h-1 w-24 bg-blue-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Section 1: Kumpulan Buttons -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                <i class="fas fa-users-cog mr-2 text-blue-500"></i> Semakan Ahli Kumpulan
+            </h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6">
+                <button onclick="showGroup(1)" id="btn-1" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 1</button>
+                <button onclick="showGroup(2)" id="btn-2" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 2</button>
+                <button onclick="showGroup(3)" id="btn-3" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 3</button>
+                <button onclick="showGroup(4)" id="btn-4" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 4</button>
+                <button onclick="showGroup(5)" id="btn-5" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 5</button>
+            </div>
+
+            <!-- Display Area for Group Details -->
+            <div id="group-details" class="hidden animate-in fade-in duration-300">
+                <div class="bg-blue-50 rounded-xl p-5 border-l-4 border-blue-500">
+                    <div class="flex flex-col md:flex-row md:justify-between mb-4">
+                        <h4 id="detail-title" class="text-xl font-bold text-blue-800">Kumpulan 1</h4>
+                        <span id="detail-pentadbir" class="text-sm font-medium bg-blue-200 text-blue-800 px-3 py-1 rounded-full self-start md:self-center mt-2 md:mt-0">Pentadbir: -</span>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-sm text-blue-600 font-semibold mb-1">Penyelaras:</p>
+                        <p class="text-gray-800 font-medium">Aida Masturina binti Hamka</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-600 font-semibold mb-2">Senarai Guru:</p>
+                        <ul id="teacher-list" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                            <!-- JS will populate this -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="placeholder-text" class="text-center py-10 text-gray-400 italic">
+                Sila klik pada butang kumpulan untuk melihat senarai guru
+            </div>
+        </div>
+
+        <!-- Section 2: Jadual Mingguan -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2 text-blue-500"></i> Jadual Tugasan Mingguan
+                </h3>
+                <div class="text-xs text-gray-500">Sesi 2026 (Minggu 1 - 43)</div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-bold">
+                        <tr>
+                            <th class="px-6 py-4 text-center w-32">Minggu</th>
+                            <th class="px-6 py-4 text-center">Kumpulan Bertugas</th>
+                            <th class="px-6 py-4">Ketua Kumpulan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-table" class="divide-y divide-gray-100">
+                        <!-- JS will populate this -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const groupData = {
+            1: {
+                name: "Kumpulan 1",
+                pentadbir: "GB",
+                penyelaras: "Aida Masturina binti Hamka",
+                teachers: ["Mohd Rafeeq bin Sulaiman (K)", "Hilwa Hayati binti Mohamad Ajalan", "Nur Azlin binti Norizan", "Ting Yu Yong", "Syaeeza Liana binti Ramli"],
+                weeks: [3, 8, 13, 18, 23, 28, 33, 38, 43]
+            },
+            2: {
+                name: "Kumpulan 2",
+                pentadbir: "PKP",
+                penyelaras: "Aida Masturina binti Hamka",
+                teachers: ["Dliyana anak John (K)", "Jeriah anak Simon", "Aifa Nur Bestari binti Raduan", "Hairol bin Ismail", "Nur Fadzliah Amal binti Osman", "Muhammad Zulhusaini bin Abdul Wahab"],
+                weeks: [4, 9, 14, 19, 24, 29, 34, 39]
+            },
+            3: {
+                name: "Kumpulan 3",
+                pentadbir: "PKHEM",
+                penyelaras: "Aida Masturina binti Hamka",
+                teachers: ["Ting Hua Ee (K)", "Khairi bin Sahari", "Teng Ru Yun", "Mary Jane Amoi Umpang anak Daniel Mawat", "Vanitha a/p Subramaniam"],
+                weeks: [5, 10, 15, 20, 25, 30, 35, 40]
+            },
+            4: {
+                name: "Kumpulan 4",
+                pentadbir: "PKKK",
+                penyelaras: "Aida Masturina binti Hamka",
+                teachers: ["Zeprina anak Benik (K)", "Jacqueline Tiong Hoe Ding", "Nur Hidayu binti Yusop", "Fazri bin Bakeri", "Bryan anak Constant"],
+                weeks: [1, 6, 11, 16, 21, 26, 31, 36, 41]
+            },
+            5: {
+                name: "Kumpulan 5",
+                pentadbir: "GB",
+                penyelaras: "Aida Masturina binti Hamka",
+                teachers: ["Eifilisia Amber anak Mervin (K)", "Sabariah binti Solhi", "Jimmy anak Peter", "Nurul Huda bte Mohd Ihwan", "Wong Pick King", "Christian Simon"],
+                weeks: [2, 7, 12, 17, 22, 27, 32, 37, 42]
+            }
+        };
+
+        function showGroup(id) {
+            const data = groupData[id];
+            
+            // UI Updates
+            document.getElementById('group-details').classList.remove('hidden');
+            document.getElementById('placeholder-text').classList.add('hidden');
+            document.getElementById('detail-title').innerText = data.name;
+            document.getElementById('detail-pentadbir').innerText = `Pentadbir: ${data.pentadbir}`;
+            
+            const listEl = document.getElementById('teacher-list');
+            listEl.innerHTML = '';
+            data.teachers.forEach(teacher => {
+                const li = document.createElement('li');
+                li.className = "flex items-center space-x-2";
+                li.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span> <span>${teacher}</span>`;
+                listEl.appendChild(li);
+            });
+
+            // Button Highlight
+            document.querySelectorAll('.group-btn').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById(`btn-${id}`).classList.add('tab-active');
+        }
+
+        function populateSchedule() {
+            const table = document.getElementById('schedule-table');
+            const totalWeeks = 43;
+            
+            for (let w = 1; w <= totalWeeks; w++) {
+                let assignedGroup = null;
+                
+                // Find group for this week
+                for (let gid in groupData) {
+                    if (groupData[gid].weeks.includes(w)) {
+                        assignedGroup = groupData[gid];
+                        break;
+                    }
+                }
+
+                if (assignedGroup) {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-gray-50 transition-colors";
+                    
+                    row.innerHTML = `
+                        <td class="px-6 py-4 font-semibold text-gray-700 text-center">Minggu ${w}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="inline-block px-3 py-1 rounded-lg text-sm font-medium ${getGroupColor(assignedGroup.name)}">
+                                ${assignedGroup.name}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-600">
+                            ${assignedGroup.teachers[0]}
+                        </td>
+                    `;
+                    table.appendChild(row);
+                }
+            }
+        }
+
+        function getGroupColor(name) {
+            const colors = {
+                "Kumpulan 1": "bg-indigo-100 text-indigo-700",
+                "Kumpulan 2": "bg-emerald-100 text-emerald-700",
+                "Kumpulan 3": "bg-amber-100 text-amber-700",
+                "Kumpulan 4": "bg-rose-100 text-rose-700",
+                "Kumpulan 5": "bg-cyan-100 text-cyan-700"
+            };
+            return colors[name] || "bg-gray-100 text-gray-700";
+        }
+
+        window.onload = populateSchedule;
+    </script>
+</body>
+</html>
