@@ -5,83 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadual Guru Bertugas SKPK Miri 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .tab-active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .tab-btn.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .filter-btn.active {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .print-full-width { width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+            .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; }
+            .border { border-color: #e2e8f0 !important; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen pb-12">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    <div class="max-w-4xl mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Jadual Guru Bertugas Harian</h1>
-            <h2 class="text-xl text-blue-600 font-semibold uppercase tracking-wider">SK Pendidikan Khas Miri - Sesi 2026</h2>
-            <div class="h-1 w-24 bg-blue-500 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <!-- Section 1: Kumpulan Buttons -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
-            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                <i class="fas fa-users-cog mr-2 text-blue-500"></i> Semakan Ahli Kumpulan
-            </h3>
-            
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6">
-                <button onclick="showGroup(1)" id="btn-1" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 1</button>
-                <button onclick="showGroup(2)" id="btn-2" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 2</button>
-                <button onclick="showGroup(3)" id="btn-3" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 3</button>
-                <button onclick="showGroup(4)" id="btn-4" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 4</button>
-                <button onclick="showGroup(5)" id="btn-5" class="group-btn py-3 px-4 rounded-xl border-2 border-blue-50 text-blue-600 font-medium hover:bg-blue-50 transition-all">Kumpulan 5</button>
+    <!-- Top Announcement Bar -->
+    <header class="bg-slate-900 text-white py-3 px-4 no-print border-b border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-2">
+            <div class="flex items-center space-x-2">
+                <span class="bg-blue-600 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">Sesi 2026</span>
+                <span class="text-slate-300 font-medium">Sekolah Kebangsaan Pendidikan Khas Miri</span>
             </div>
+            <div class="flex items-center space-x-4 text-slate-400">
+                <span><i class="fas fa-user-tie text-blue-400 mr-1"></i> Penyelaras: <strong>Aida Masturina binti Hamka</strong></span>
+            </div>
+        </div>
+    </header>
 
-            <!-- Display Area for Group Details -->
-            <div id="group-details" class="hidden animate-in fade-in duration-300">
-                <div class="bg-blue-50 rounded-xl p-5 border-l-4 border-blue-500">
-                    <div class="flex flex-col md:flex-row md:justify-between mb-4">
-                        <h4 id="detail-title" class="text-xl font-bold text-blue-800">Kumpulan 1</h4>
-                        <span id="detail-pentadbir" class="text-sm font-medium bg-blue-200 text-blue-800 px-3 py-1 rounded-full self-start md:self-center mt-2 md:mt-0">Pentadbir: -</span>
+    <!-- Main Header -->
+    <main class="max-w-6xl mx-auto px-4 py-6 w-full flex-grow">
+        <div class="bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-white pointer-events-none">
+                <i class="fas fa-calendar-check text-[220px]"></i>
+            </div>
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-md border border-blue-400/30 px-3 py-1 rounded-full text-xs font-semibold text-blue-200 mb-3">
+                        <i class="fas fa-school"></i> SKPK MIRI
                     </div>
-                    <div class="mb-4">
-                        <p class="text-sm text-blue-600 font-semibold mb-1">Penyelaras:</p>
-                        <p class="text-gray-800 font-medium">Aida Masturina binti Hamka</p>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Jadual Guru Bertugas Harian</h1>
+                    <p class="text-blue-100 text-sm sm:text-base mt-1 font-normal opacity-90">
+                        Sesi Persekolahan 2026 (Minggu 1 hingga Minggu 43)
+                    </p>
+                </div>
+                
+                <!-- Quick Stats / Active Week Card -->
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center gap-4 min-w-[240px] no-print">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/30 flex items-center justify-center text-2xl text-blue-200 shrink-0">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div>
-                        <p class="text-sm text-blue-600 font-semibold mb-2">Senarai Guru:</p>
-                        <ul id="teacher-list" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
-                            <!-- JS will populate this -->
-                        </ul>
+                    <div class="flex-grow">
+                        <div class="text-xs text-blue-200 uppercase font-bold tracking-wider">Paparan Minggu</div>
+                        <div class="flex items-center justify-between mt-1">
+                            <button onclick="changeWeek(-1)" class="text-blue-200 hover:text-white px-1.5 py-0.5 rounded hover:bg-white/10"><i class="fas fa-chevron-left text-xs"></i></button>
+                            <span id="current-week-display" class="text-lg font-bold text-white">Minggu 1</span>
+                            <button onclick="changeWeek(1)" class="text-blue-200 hover:text-white px-1.5 py-0.5 rounded hover:bg-white/10"><i class="fas fa-chevron-right text-xs"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="placeholder-text" class="text-center py-10 text-gray-400 italic">
-                Sila klik pada butang kumpulan untuk melihat senarai guru
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 no-print border-b border-slate-200 pb-4">
+            <button onclick="switchTab('jadual')" id="tab-jadual" class="tab-btn active px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fas fa-calendar-alt"></i> Jadual Mingguan
+            </button>
+            <button onclick="switchTab('kumpulan')" id="tab-kumpulan" class="tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 border border-slate-200">
+                <i class="fas fa-users"></i> Senarai Kumpulan
+            </button>
+            <button onclick="switchTab('carian')" id="tab-carian" class="tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 border border-slate-200">
+                <i class="fas fa-search"></i> Semak Nama Guru
+            </button>
+            <div class="ml-auto">
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 shadow-sm">
+                    <i class="fas fa-print"></i> Cetak Jadual
+                </button>
             </div>
         </div>
 
-        <!-- Section 2: Jadual Mingguan -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-gray-700 flex items-center">
-                    <i class="fas fa-calendar-alt mr-2 text-blue-500"></i> Jadual Tugasan Mingguan
-                </h3>
-                <div class="text-xs text-gray-500">Sesi 2026 (Minggu 1 - 43)</div>
+        <!-- ================= TAB 1: JADUAL MINGGUAN ================= -->
+        <section id="view-jadual" class="space-y-6">
+            <!-- Filter Bar -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 no-print flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Group Filter Buttons -->
+                <div class="flex flex-wrap gap-1.5 w-full md:w-auto">
+                    <button onclick="filterSchedule('all')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 transition" id="filter-all">Semua</button>
+                    <button onclick="filterSchedule('Kumpulan 1')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" id="filter-k1">K1</button>
+                    <button onclick="filterSchedule('Kumpulan 2')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" id="filter-k2">K2</button>
+                    <button onclick="filterSchedule('Kumpulan 3')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" id="filter-k3">K3</button>
+                    <button onclick="filterSchedule('Kumpulan 4')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" id="filter-k4">K4</button>
+                    <button onclick="filterSchedule('Kumpulan 5')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" id="filter-k5">K5</button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full md:w-72">
+                    <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="schedule-search" oninput="handleScheduleSearch()" placeholder="Cari minggu atau nama guru..." class="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                </div>
             </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-bold">
-                        <tr>
-                            <th class="px-6 py-4 text-center w-32">Minggu</th>
-                            <th class="px-6 py-4 text-center">Kumpulan Bertugas</th>
-                            <th class="px-6 py-4">Ketua Kumpulan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="schedule-table" class="divide-y divide-gray-100">
-                        <!-- JS will populate this -->
-                    </tbody>
-                </table>
+
+            <!-- Schedule Table Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden print-full-width">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
+                                <th class="py-4 px-6 text-center w-28">Minggu</th>
+                                <th class="py-4 px-6 text-center w-40">Kumpulan</th>
+                                <th class="py-4 px-6 text-center w-32">Pentadbir</th>
+                                <th class="py-4 px-6">Ketua Kumpulan</th>
+                                <th class="py-4 px-6">Ahli Bertugas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-tbody" class="divide-y divide-slate-100 text-sm">
+                            <!-- JS dynamic injection -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: SENARAI KUMPULAN ================= -->
+        <section id="view-kumpulan" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="groups-container">
+                <!-- JS dynamic injection -->
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: SEMAK NAMA GURU ================= -->
+        <section id="view-carian" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 max-w-2xl mx-auto">
+                <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <i class="fas fa-search text-blue-600"></i> Semak Tugasan Guru
+                </h3>
+                <p class="text-xs text-slate-500 mb-4">Masukkan nama anda untuk menyemak kumpulan bertugas dan tarikh/minggu tugasan anda.</p>
+                
+                <div class="relative mb-6">
+                    <i class="fas fa-user-circle absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                    <input type="text" id="teacher-search-input" onkeyup="searchTeacher(this.value)" placeholder="Taip nama guru (Cth: Rafeeq, Dliyana, Zeprina)..." class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                </div>
+
+                <div id="teacher-search-results" class="space-y-4">
+                    <div class="text-center py-8 text-slate-400 italic text-sm">
+                        Sila taip nama guru di atas untuk mula carian.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 no-print">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>&copy; 2026 SK Pendidikan Khas Miri. Hak Cipta Terpelihara.</div>
+            <div class="flex items-center gap-4">
+                <span>Penyelaras: Aida Masturina binti Hamka</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dynamic Modal for Group View -->
+    <div id="group-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden no-print">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-150">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Modal content loaded via JS -->
             </div>
         </div>
     </div>
@@ -90,72 +197,112 @@
         const groupData = {
             1: {
                 name: "Kumpulan 1",
+                badgeClass: "bg-indigo-50 text-indigo-700 border-indigo-200",
+                badgeColor: "indigo",
                 pentadbir: "GB",
                 penyelaras: "Aida Masturina binti Hamka",
-                teachers: ["Mohd Rafeeq bin Sulaiman (K)", "Hilwa Hayati binti Mohamad Ajalan", "Nur Azlin binti Norizan", "Ting Yu Yong", "Syaeeza Liana binti Ramli"],
+                leader: "Mohd Rafeeq bin Sulaiman",
+                teachers: [
+                    "Mohd Rafeeq bin Sulaiman (K)", 
+                    "Hilwa Hayati binti Mohamad Ajalan", 
+                    "Ting Yu Yong", 
+                    "Syaeeza Liana binti Ramli",
+                    "Nurul Huda bte Mohd Ihwan"
+                ],
                 weeks: [3, 8, 13, 18, 23, 28, 33, 38, 43]
             },
             2: {
                 name: "Kumpulan 2",
+                badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200",
+                badgeColor: "emerald",
                 pentadbir: "PKP",
                 penyelaras: "Aida Masturina binti Hamka",
-                teachers: ["Dliyana anak John (K)", "Jeriah anak Simon", "Aifa Nur Bestari binti Raduan", "Hairol bin Ismail", "Nur Fadzliah Amal binti Osman", "Muhammad Zulhusaini bin Abdul Wahab"],
+                leader: "Dliyana anak John",
+                teachers: [
+                    "Dliyana anak John (K)", 
+                    "Jeriah anak Simon", 
+                    "Hairol bin Ismail", 
+                    "Nur Fadzliah Amal binti Osman",
+                    "Adam Baihaqi bin Mohd Fazlan"
+                ],
                 weeks: [4, 9, 14, 19, 24, 29, 34, 39]
             },
             3: {
                 name: "Kumpulan 3",
+                badgeClass: "bg-amber-50 text-amber-700 border-amber-200",
+                badgeColor: "amber",
                 pentadbir: "PKHEM",
                 penyelaras: "Aida Masturina binti Hamka",
-                teachers: ["Ting Hua Ee (K)", "Khairi bin Sahari", "Teng Ru Yun", "Mary Jane Amoi Umpang anak Daniel Mawat", "Vanitha a/p Subramaniam"],
+                leader: "Ting Hua Ee",
+                teachers: [
+                    "Ting Hua Ee (K)", 
+                    "Khairi bin Sahari", 
+                    "Teng Ru Yun", 
+                    "Mary Jane Amoi Umpang anak Daniel Mawat"
+                ],
                 weeks: [5, 10, 15, 20, 25, 30, 35, 40]
             },
             4: {
                 name: "Kumpulan 4",
+                badgeClass: "bg-rose-50 text-rose-700 border-rose-200",
+                badgeColor: "rose",
                 pentadbir: "PKKK",
                 penyelaras: "Aida Masturina binti Hamka",
-                teachers: ["Zeprina anak Benik (K)", "Jacqueline Tiong Hoe Ding", "Nur Hidayu binti Yusop", "Fazri bin Bakeri", "Bryan anak Constant"],
+                leader: "Zeprina anak Benik",
+                teachers: [
+                    "Zeprina anak Benik (K)", 
+                    "Jacqueline Tiong Hoe Ding", 
+                    "Nur Hidayu binti Yusop", 
+                    "Fazri bin Bakeri", 
+                    "Bryan anak Constant"
+                ],
                 weeks: [1, 6, 11, 16, 21, 26, 31, 36, 41]
             },
             5: {
                 name: "Kumpulan 5",
+                badgeClass: "bg-cyan-50 text-cyan-700 border-cyan-200",
+                badgeColor: "cyan",
                 pentadbir: "GB",
                 penyelaras: "Aida Masturina binti Hamka",
-                teachers: ["Eifilisia Amber anak Mervin (K)", "Sabariah binti Solhi", "Jimmy anak Peter", "Nurul Huda bte Mohd Ihwan", "Wong Pick King", "Christian Simon"],
+                leader: "Eifilisia Amber anak Mervin",
+                teachers: [
+                    "Eifilisia Amber anak Mervin (K)", 
+                    "Sabariah binti Solhi", 
+                    "Jimmy anak Peter", 
+                    "Wong Pick King", 
+                    "Christian Simon"
+                ],
                 weeks: [2, 7, 12, 17, 22, 27, 32, 37, 42]
             }
         };
 
-        function showGroup(id) {
-            const data = groupData[id];
-            
-            // UI Updates
-            document.getElementById('group-details').classList.remove('hidden');
-            document.getElementById('placeholder-text').classList.add('hidden');
-            document.getElementById('detail-title').innerText = data.name;
-            document.getElementById('detail-pentadbir').innerText = `Pentadbir: ${data.pentadbir}`;
-            
-            const listEl = document.getElementById('teacher-list');
-            listEl.innerHTML = '';
-            data.teachers.forEach(teacher => {
-                const li = document.createElement('li');
-                li.className = "flex items-center space-x-2";
-                li.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span> <span>${teacher}</span>`;
-                listEl.appendChild(li);
-            });
+        let activeWeek = 1;
+        let activeFilterGroup = 'all';
 
-            // Button Highlight
-            document.querySelectorAll('.group-btn').forEach(btn => btn.classList.remove('tab-active'));
-            document.getElementById(`btn-${id}`).classList.add('tab-active');
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            renderScheduleTable();
+            renderGroupsCardView();
+            updateActiveWeekDisplay();
+        });
+
+        // Tab Switcher Logic
+        function switchTab(tabName) {
+            document.querySelectorAll('section[id^="view-"]').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(`view-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
         }
 
-        function populateSchedule() {
-            const table = document.getElementById('schedule-table');
-            const totalWeeks = 43;
-            
-            for (let w = 1; w <= totalWeeks; w++) {
+        // Render Main Schedule Table
+        function renderScheduleTable(searchTerm = '') {
+            const tbody = document.getElementById('schedule-tbody');
+            tbody.innerHTML = '';
+
+            for (let w = 1; w <= 43; w++) {
                 let assignedGroup = null;
-                
-                // Find group for this week
+
                 for (let gid in groupData) {
                     if (groupData[gid].weeks.includes(w)) {
                         assignedGroup = groupData[gid];
@@ -163,38 +310,236 @@
                     }
                 }
 
-                if (assignedGroup) {
-                    const row = document.createElement('tr');
-                    row.className = "hover:bg-gray-50 transition-colors";
-                    
-                    row.innerHTML = `
-                        <td class="px-6 py-4 font-semibold text-gray-700 text-center">Minggu ${w}</td>
-                        <td class="px-6 py-4 text-center">
-                            <span class="inline-block px-3 py-1 rounded-lg text-sm font-medium ${getGroupColor(assignedGroup.name)}">
-                                ${assignedGroup.name}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-600">
-                            ${assignedGroup.teachers[0]}
-                        </td>
-                    `;
-                    table.appendChild(row);
+                if (!assignedGroup) continue;
+
+                // Apply group filter
+                if (activeFilterGroup !== 'all' && assignedGroup.name !== activeFilterGroup) {
+                    continue;
                 }
+
+                // Apply search filter
+                if (searchTerm.trim() !== '') {
+                    const term = searchTerm.toLowerCase();
+                    const weekStr = `minggu ${w}`;
+                    const leaderStr = assignedGroup.leader.toLowerCase();
+                    const groupStr = assignedGroup.name.toLowerCase();
+                    const hasTeacherMatch = assignedGroup.teachers.some(t => t.toLowerCase().includes(term));
+
+                    if (!weekStr.includes(term) && !leaderStr.includes(term) && !groupStr.includes(term) && !hasTeacherMatch) {
+                        continue;
+                    }
+                }
+
+                const isCurrent = w === activeWeek;
+                const tr = document.createElement('tr');
+                tr.className = `transition hover:bg-slate-50/80 ${isCurrent ? 'bg-blue-50/70 border-l-4 border-l-blue-600 font-medium' : ''}`;
+                
+                const membersList = assignedGroup.teachers.map(t => 
+                    t.includes('(K)') ? `<span class="font-semibold text-slate-800">${t}</span>` : `<span class="text-slate-600">${t}</span>`
+                ).join(', ');
+
+                tr.innerHTML = `
+                    <td class="py-4 px-6 text-center font-bold text-slate-700">
+                        <div class="inline-flex items-center gap-1.5 ${isCurrent ? 'text-blue-600 font-extrabold' : ''}">
+                            ${isCurrent ? '<i class="fas fa-arrow-right text-xs text-blue-600 animate-pulse"></i>' : ''}
+                            Minggu ${w}
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <span class="inline-block px-3 py-1 text-xs font-bold rounded-lg border ${assignedGroup.badgeClass}">
+                            ${assignedGroup.name}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-200">
+                            ${assignedGroup.pentadbir}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 font-semibold text-slate-800">
+                        <i class="fas fa-user-shield text-blue-500 text-xs mr-1"></i> ${assignedGroup.leader}
+                    </td>
+                    <td class="py-4 px-6 text-xs leading-relaxed max-w-xs sm:max-w-md">
+                        ${membersList}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            if (tbody.children.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-12 text-slate-400 italic">
+                            Tiada rekod tugasan ditemui untuk kriteria carian anda.
+                        </td>
+                    </tr>
+                `;
             }
         }
 
-        function getGroupColor(name) {
-            const colors = {
-                "Kumpulan 1": "bg-indigo-100 text-indigo-700",
-                "Kumpulan 2": "bg-emerald-100 text-emerald-700",
-                "Kumpulan 3": "bg-amber-100 text-amber-700",
-                "Kumpulan 4": "bg-rose-100 text-rose-700",
-                "Kumpulan 5": "bg-cyan-100 text-cyan-700"
-            };
-            return colors[name] || "bg-gray-100 text-gray-700";
+        // Render Group Cards
+        function renderGroupsCardView() {
+            const container = document.getElementById('groups-container');
+            container.innerHTML = '';
+
+            for (let gid in groupData) {
+                const group = groupData[gid];
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition flex flex-col justify-between";
+
+                const teacherItems = group.teachers.map(t => `
+                    <li class="flex items-center space-x-2 text-sm text-slate-700">
+                        <i class="fas fa-check-circle text-blue-500 text-xs"></i>
+                        <span>${t}</span>
+                    </li>
+                `).join('');
+
+                const weeksBadges = group.weeks.map(w => `
+                    <span class="bg-slate-100 text-slate-600 text-xs font-semibold px-2 py-0.5 rounded border border-slate-200">M${w}</span>
+                `).join(' ');
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 text-xs font-bold rounded-lg border ${group.badgeClass}">
+                                ${group.name}
+                            </span>
+                            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">
+                                Pentadbir: ${group.pentadbir}
+                            </span>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Penyelaras</div>
+                            <div class="text-sm font-semibold text-slate-700">${group.penyelaras}</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-2">Ahli Kumpulan</div>
+                            <ul class="space-y-2">
+                                ${teacherItems}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-2">Minggu Bertugas (${group.weeks.length} Kali)</div>
+                        <div class="flex flex-wrap gap-1">
+                            ${weeksBadges}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
         }
 
-        window.onload = populateSchedule;
+        // Filter Functionality
+        function filterSchedule(groupName) {
+            activeFilterGroup = groupName;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if (groupName === 'all') document.getElementById('filter-all').classList.add('active');
+            else if (groupName === 'Kumpulan 1') document.getElementById('filter-k1').classList.add('active');
+            else if (groupName === 'Kumpulan 2') document.getElementById('filter-k2').classList.add('active');
+            else if (groupName === 'Kumpulan 3') document.getElementById('filter-k3').classList.add('active');
+            else if (groupName === 'Kumpulan 4') document.getElementById('filter-k4').classList.add('active');
+            else if (groupName === 'Kumpulan 5') document.getElementById('filter-k5').classList.add('active');
+
+            renderScheduleTable(document.getElementById('schedule-search').value);
+        }
+
+        function handleScheduleSearch() {
+            const query = document.getElementById('schedule-search').value;
+            renderScheduleTable(query);
+        }
+
+        // Teacher Search System
+        function searchTeacher(query) {
+            const resultsContainer = document.getElementById('teacher-search-results');
+            
+            if (!query || query.trim().length < 2) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 italic text-sm">
+                        Sila taip sekurang-kurangnya 2 huruf nama guru.
+                    </div>
+                `;
+                return;
+            }
+
+            const q = query.toLowerCase().trim();
+            let matches = [];
+
+            for (let gid in groupData) {
+                const group = groupData[gid];
+                group.teachers.forEach(t => {
+                    if (t.toLowerCase().includes(q)) {
+                        matches.push({
+                            teacherName: t,
+                            group: group
+                        });
+                    }
+                });
+            }
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="bg-amber-50 text-amber-800 p-4 rounded-xl text-center text-sm border border-amber-200">
+                        Tiada guru ditemui dengan nama "<strong>${query}</strong>". Sila semak ejaan nama guru.
+                    </div>
+                `;
+                return;
+            }
+
+            resultsContainer.innerHTML = matches.map(m => {
+                const isLeader = m.teacherName.includes('(K)');
+                const weeksList = m.group.weeks.map(w => `
+                    <span class="bg-blue-100 text-blue-800 font-bold px-2 py-1 rounded text-xs">Minggu ${w}</span>
+                `).join(' ');
+
+                return `
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">${m.teacherName}</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">${isLeader ? 'Ketua Kumpulan' : 'Ahli Kumpulan Bertugas'}</p>
+                            </div>
+                            <span class="px-3 py-1 text-xs font-bold rounded-lg border ${m.group.badgeClass}">
+                                ${m.group.name}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 text-xs bg-white p-3 rounded-lg border border-slate-100">
+                            <div><span class="text-slate-400">Pentadbir:</span> <strong>${m.group.pentadbir}</strong></div>
+                            <div><span class="text-slate-400">Ketua:</span> <strong>${m.group.leader}</strong></div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs font-bold text-slate-600 mb-1.5">Senarai Minggu Tugas:</div>
+                            <div class="flex flex-wrap gap-1.5">
+                                ${weeksList}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Week Controller Navigation
+        function changeWeek(delta) {
+            activeWeek += delta;
+            if (activeWeek < 1) activeWeek = 43;
+            if (activeWeek > 43) activeWeek = 1;
+
+            updateActiveWeekDisplay();
+            renderScheduleTable(document.getElementById('schedule-search').value);
+        }
+
+        function updateActiveWeekDisplay() {
+            document.getElementById('current-week-display').innerText = `Minggu ${activeWeek}`;
+        }
+
+        function closeModal() {
+            document.getElementById('group-modal').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
